@@ -1,0 +1,42 @@
+// Copyright 2018 - 2019
+// The "project-template" Authors. All rights reserved.
+// Use of this source code is governed by the MIT License that can be found in the LICENSE file.
+
+syntax = "proto3";
+package ProtoLogger;
+
+enum Message_Type
+{
+   INVALID_TYPE = 0;
+   VERSION_INTERFACE = 1;
+   WATCHDOG_KICK = 2;
+}
+
+enum Message_Status
+{
+   INVALID_STATUS = 0;
+
+   ACCEPT = 1;
+   REJECT = 2;
+}
+
+message Logger_Message
+{
+   Message_Type message_type = 1;
+
+   oneof payload
+   {
+      Version_Interface version = 2;
+      Watchdog_Kick watchdog = 3;
+   }
+}
+
+message Version_Interface
+{
+   Message_Status status = 1;
+};
+
+message Watchdog_Kick
+{
+   Message_Status status = 1;
+};

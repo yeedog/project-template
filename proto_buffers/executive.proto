@@ -1,0 +1,42 @@
+// Copyright 2018 - 2019
+// The "project-template" Authors. All rights reserved.
+// Use of this source code is governed by the MIT License that can be found in the LICENSE file.
+
+syntax = "proto3";
+package ProtoExecutive;
+
+enum Process_Id
+{
+   INVALID_PROCESS = 0;
+
+   LOGGER = 1;
+}
+
+enum Message_Type
+{
+   INVALID_TYPE = 0;
+   VERSION_INTERFACE = 1;
+   WATCHDOG_KICK = 2;
+}
+
+message Exec_Message
+{
+   Message_Type message_type = 1;
+
+   oneof payload
+   {
+      Version_Interface version = 2;
+      Watchdog_Kick watchdog = 3;
+   }
+}
+
+message Version_Interface
+{
+   int32 version = 1;
+};
+
+message Watchdog_Kick
+{
+   Process_Id id = 1;
+};
+
