@@ -3,15 +3,7 @@
 // Use of this source code is governed by the MIT License that can be found in the LICENSE file.
 
 syntax = "proto3";
-package ProtoExecutive;
-
-enum Process_Id
-{
-   INVALID_PROCESS = 0;
-
-   LOGGER = 1;
-   MODEL = 2;
-}
+package ProtoModel;
 
 enum Message_Type
 {
@@ -20,7 +12,15 @@ enum Message_Type
    WATCHDOG_KICK = 2;
 }
 
-message Exec_Message
+enum Message_Status
+{
+   INVALID_STATUS = 0;
+
+   ACCEPT = 1;
+   REJECT = 2;
+}
+
+message Model_Message
 {
    Message_Type message_type = 1;
 
@@ -33,11 +33,10 @@ message Exec_Message
 
 message Version_Interface
 {
-   int32 version = 1;
+   Message_Status status = 1;
 };
 
 message Watchdog_Kick
 {
-   Process_Id id = 1;
+   Message_Status status = 1;
 };
-

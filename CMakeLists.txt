@@ -12,7 +12,5 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall")
 add_subdirectory( executive )
 add_subdirectory( logger )
 add_subdirectory( message_queues )
+add_subdirectory( model )
 add_subdirectory( proto_buffers )
-
-
-

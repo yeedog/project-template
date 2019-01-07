@@ -12,7 +12,7 @@ find_package( Protobuf REQUIRED )
 include_directories( $(PROTOBUF_INCLUDE_DIR))
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-protobuf_generate_cpp( PROTO_SRC PROTO_HEADER executive.proto logger.proto )
+protobuf_generate_cpp( PROTO_SRC PROTO_HEADER executive.proto logger.proto model.proto )
 
 add_library( proto ${PROTO_SRC} ${PROTO_HEADER} )
 target_link_libraries( proto ${PROTOBUF_LIBRARY} )

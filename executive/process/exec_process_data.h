@@ -21,7 +21,8 @@ namespace executive_process_data
 
    const std::vector<executive_process_data::process_data> process_data_map =
       {
-         {ProtoExecutive::LOGGER, "/mnt/c/Users/Brian/CLionProjects/NewProjectTemplate/cmake-build-debug/logger", "logger"},
+         {ProtoExecutive::LOGGER, "/mnt/c/Users/Brian/CLionProjects/project-template/cmake-build-debug/logger", "logger"},
+         {ProtoExecutive::MODEL,  "/mnt/c/Users/Brian/CLionProjects/project-template/cmake-build-debug/model",  "model"},
       };
 };
 
