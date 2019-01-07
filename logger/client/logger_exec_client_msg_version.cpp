@@ -5,22 +5,22 @@
 #include "logger.pb.h"
 #include "executive.pb.h"
 
-#include "exec_client.h"
-#include "exec_client_msg_version.h"
+#include "logger_exec_client.h"
+#include "logger_exec_client_msg_version.h"
 
-exec_client_msg_version::exec_client_msg_version() :
+logger_exec_client_msg_version::logger_exec_client_msg_version() :
    _messageFromServer()
 {
    // do nothing
 }
 
-exec_client_msg_version::exec_client_msg_version( const ProtoLogger::Logger_Message msg ) :
+logger_exec_client_msg_version::logger_exec_client_msg_version( const ProtoLogger::Logger_Message msg ) :
    _messageFromServer( msg )
 {
    // do nothing
 }
 
-std::string exec_client_msg_version::create()
+std::string logger_exec_client_msg_version::create()
 {
    auto version = std::make_shared<ProtoExecutive::Version_Interface>();
    version.get()->set_version( 1 );
@@ -33,12 +33,12 @@ std::string exec_client_msg_version::create()
    return msg.SerializeAsString();
 }
 
-void exec_client_msg_version::process()
+void logger_exec_client_msg_version::process()
 {
    std::cout << "Logger MQ Client Process: " << _messageFromServer.ShortDebugString() << std::endl;
 
    if ( _messageFromServer.version().status() != ProtoLogger::ACCEPT )
    {
-      std::cout << "Message Failed: Version" << std::endl;
+      std::cout << "Logger Message Failed: Version" << std::endl;
    }
 }

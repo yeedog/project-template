@@ -4,22 +4,22 @@
 
 #include <executive.pb.h>
 
-#include "exec_client_msg.h"
-#include "exec_client_msg_version.h"
-#include "exec_client_msg_watchdog.h"
+#include "logger_exec_client_msg.h"
+#include "logger_exec_client_msg_version.h"
+#include "logger_exec_client_msg_watchdog.h"
 
-std::shared_ptr<exec_client_msg> exec_client_msg::build( const ProtoExecutive::Message_Type message_type )
+std::shared_ptr<logger_exec_client_msg> logger_exec_client_msg::build( const ProtoExecutive::Message_Type message_type )
 {
    switch ( message_type )
    {
       case ProtoExecutive::VERSION_INTERFACE:
       {
-         return std::make_shared<exec_client_msg_version>();
+         return std::make_shared<logger_exec_client_msg_version>();
       }
 
       case ProtoExecutive::WATCHDOG_KICK:
       {
-         return std::make_shared<exec_client_msg_watchdog>();
+         return std::make_shared<logger_exec_client_msg_watchdog>();
       }
 
       case ProtoExecutive::INVALID_TYPE:
@@ -32,7 +32,7 @@ std::shared_ptr<exec_client_msg> exec_client_msg::build( const ProtoExecutive::M
    return nullptr;
 }
 
-std::shared_ptr<exec_client_msg> exec_client_msg::build( const std::string data )
+std::shared_ptr<logger_exec_client_msg> logger_exec_client_msg::build( const std::string data )
 {
    ProtoLogger::Logger_Message msg;
    msg.ParseFromString( data );
@@ -41,12 +41,12 @@ std::shared_ptr<exec_client_msg> exec_client_msg::build( const std::string data 
    {
       case ProtoLogger::VERSION_INTERFACE:
       {
-         return std::make_shared<exec_client_msg_version>( msg );
+         return std::make_shared<logger_exec_client_msg_version>( msg );
       }
 
       case ProtoLogger::WATCHDOG_KICK:
       {
-         return std::make_shared<exec_client_msg_watchdog>( msg );
+         return std::make_shared<logger_exec_client_msg_watchdog>( msg );
       }
 
       case ProtoLogger::INVALID_TYPE:

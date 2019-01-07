@@ -6,10 +6,10 @@
 #include <csignal>
 #include <thread>
 #include <cstring>
-#include <exec_client.h>
+#include <logger_exec_client.h>
 
 #include "logger.h"
-#include "exec_client_msg_version.h"
+#include "logger_exec_client_msg_version.h"
 
 namespace
 {
@@ -67,7 +67,7 @@ int main()
 
    installSignals();
 
-   exec_client::getInstance().process( ProtoExecutive::VERSION_INTERFACE );
+   logger_exec_client::getInstance().process( ProtoExecutive::VERSION_INTERFACE );
 
    logger log;
 
@@ -78,7 +78,7 @@ int main()
 
       std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
 
-      exec_client::getInstance().process( ProtoExecutive::WATCHDOG_KICK );
+      logger_exec_client::getInstance().process( ProtoExecutive::WATCHDOG_KICK );
    }
 
    std::cout << "Logger: Exiting" << std::endl;

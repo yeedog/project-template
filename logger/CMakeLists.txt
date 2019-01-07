@@ -13,14 +13,14 @@ include_directories( ../cmake-build-debug/proto_buffers/ )
 include_directories( client )
 
 set( LOGGER_SRC_FILES
-     client/exec_client.cpp
-     client/exec_client.h
-     client/exec_client_msg.cpp
-     client/exec_client_msg.h
-     client/exec_client_msg_version.cpp
-     client/exec_client_msg_version.h
-     client/exec_client_msg_watchdog.cpp
-     client/exec_client_msg_watchdog.h
+     client/logger_exec_client.cpp
+     client/logger_exec_client.h
+     client/logger_exec_client_msg.cpp
+     client/logger_exec_client_msg.h
+     client/logger_exec_client_msg_version.cpp
+     client/logger_exec_client_msg_version.h
+     client/logger_exec_client_msg_watchdog.cpp
+     client/logger_exec_client_msg_watchdog.h
      logger.cpp
      logger.h
      main.cpp )
