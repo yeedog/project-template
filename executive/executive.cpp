@@ -18,7 +18,7 @@ void executive::start()
    auto loop = true;
    do
    {
-      auto[id, proc] = exec_process_map::getInstance().find( exec_process::STOPPED );
+      auto[id, proc] = exec_process_map::getInstance().find( exec_process::status::STOPPED );
 
       loop = ( id != ProtoExecutive::INVALID_PROCESS );
       if ( loop )

@@ -78,8 +78,8 @@ int main()
    }
 
    std::cout << "Executive: Exiting Imminent" << std::endl;
-   exec.stop( exec_process::STARTED );
-   exec.stop( exec_process::RUNNING );
+   exec.stop( exec_process::status::STARTED );
+   exec.stop( exec_process::status::RUNNING );
 
    std::cout << "Executive: Exiting" << std::endl;
    return 0;

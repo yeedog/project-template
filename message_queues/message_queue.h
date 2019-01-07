@@ -11,15 +11,15 @@ class message_queue
 {
    public:
 
-      enum MESSAGE_QUEUE_STATUS
+      enum class message_queue_status
       {
-         INVALID_QUEUE_STATUS,
+            MESSAGE_QUEUE_INVALID,
 
-         MESSAGE_QUEUE_FAIL,
-         MESSAGE_QUEUE_COMPLETE
+            MESSAGE_QUEUE_FAIL,
+            MESSAGE_QUEUE_COMPLETE
       };
 
-      MESSAGE_QUEUE_STATUS send( std::string );
+      message_queue_status send( std::string );
       std::string receive();
 
    protected:

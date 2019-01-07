@@ -22,16 +22,16 @@ message_queue::~message_queue()
    zmq_ctx_destroy( _context );
 }
 
-message_queue::MESSAGE_QUEUE_STATUS message_queue::send( const std::string message )
+message_queue::message_queue_status message_queue::send( const std::string message )
 {
    const int32_t sent_bytes = zmq_send( _socket, message.c_str(), message.size(), ZMQ_DONTWAIT );
    if ( sent_bytes != static_cast<int32_t >( message.size() ) )
    {
       std::cout << "Send Failed with Errno (" << errno << "): " << strerror( errno ) << std::endl;
-      return MESSAGE_QUEUE_FAIL;
+      return message_queue_status::MESSAGE_QUEUE_FAIL;
    }
 
-   return MESSAGE_QUEUE_COMPLETE;
+   return message_queue_status::MESSAGE_QUEUE_COMPLETE;
 }
 
 std::string message_queue::receive()

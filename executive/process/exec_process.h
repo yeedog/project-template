@@ -12,7 +12,7 @@ class exec_process
 {
    public:
 
-      enum status
+      enum class status
       {
          STARTED,
          RUNNING,

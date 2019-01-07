@@ -14,7 +14,7 @@ exec_process::exec_process( const std::string path, const std::string name ) :
    _name( name ),
    _full_name( _path + "/" + _name ),
    _pid( -1 ),
-   _status( STOPPED ),
+   _status( status::STOPPED ),
    _system_time_sec()
 {
    //do nothing
@@ -22,7 +22,7 @@ exec_process::exec_process( const std::string path, const std::string name ) :
 
 void exec_process::start()
 {
-   assert( _status == STOPPED );
+   assert( _status == status::STOPPED );
 
    _pid = fork();
    if ( _pid < 0 )
@@ -39,7 +39,7 @@ void exec_process::start()
    }
    else
    {
-      _status = STARTED;
+      _status = status::STARTED;
    }
 }
 
@@ -69,7 +69,7 @@ void exec_process::stop()
          std::cout << "\tStatus: (" << status << ")" << std::endl;
 
          _pid = -1;
-         _status = STOPPED;
+         _status = status::STOPPED;
       }
    }
 }
@@ -79,7 +79,7 @@ void exec_process::kick_watchdog()
    //std::cout << "Kicking Watchdog For Process: " << _name << std::endl;
 
    _system_time_sec = std::chrono::system_clock::now();
-   _status = RUNNING;
+   _status = status::RUNNING;
 
    //auto time_t = std::chrono::system_clock::to_time_t( _system_time_sec );
    //std::cout << "Kicking Watchdog For Process: " << std::to_string( time_t ) << std::endl;

@@ -43,8 +43,8 @@ void exec_server::process()
 
 void exec_server::send( const std::string message )
 {
-   message_queue::MESSAGE_QUEUE_STATUS status = message_queue::INVALID_QUEUE_STATUS;
-   while ( status != message_queue::MESSAGE_QUEUE_COMPLETE )
+   message_queue::message_queue_status status = message_queue::message_queue_status::MESSAGE_QUEUE_INVALID;
+   while ( status != message_queue::message_queue_status::MESSAGE_QUEUE_COMPLETE )
    {
       status = _mq_exec_server.send( message );
    }
