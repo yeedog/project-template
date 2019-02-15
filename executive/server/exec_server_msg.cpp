@@ -7,19 +7,25 @@
 #include "exec_server_msg_version.h"
 #include "exec_server_msg_watchdog.h"
 
-std::shared_ptr<exec_server_msg> exec_server_msg::build(const std::string data)
+exec_server_msg::exec_server_msg( const ProtoExecutive::Exec_Inbound_Message msg ) :
+   _messageFromClient( msg )
 {
-   ProtoExecutive::Exec_Message msg;
-   msg.ParseFromString(data);
+   // do nothing
+}
 
-   switch (msg.message_type())
+std::shared_ptr<exec_server_msg> exec_server_msg::build( const std::string data )
+{
+   ProtoExecutive::Exec_Inbound_Message msg;
+   msg.ParseFromString( data );
+
+   switch ( msg.message_type() )
    {
-      case ProtoExecutive::VERSION_INTERFACE:
+      case ProtoExecutive::VERSION:
       {
          return std::make_shared<exec_server_msg_version>( msg );
       }
 
-      case ProtoExecutive::WATCHDOG_KICK:
+      case ProtoExecutive::WATCHDOG:
       {
          return std::make_shared<exec_server_msg_watchdog>( msg );
       }
@@ -32,4 +38,9 @@ std::shared_ptr<exec_server_msg> exec_server_msg::build(const std::string data)
    }
 
    return nullptr;
+}
+
+ProtoExecutive::Exec_Inbound_Message exec_server_msg::getMessageFromClient() const
+{
+   return _messageFromClient;
 }

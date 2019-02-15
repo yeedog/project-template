@@ -4,13 +4,17 @@
 
 #include "executive.h"
 #include "exec_server.h"
-
 #include "exec_process_data.h"
 #include "exec_process_map.h"
 
 void executive::init()
 {
    exec_process_map::getInstance().init( executive_process_data::process_data_map );
+}
+
+void executive::run()
+{
+   exec_server::getInstance().process();
 }
 
 void executive::start()
@@ -45,9 +49,4 @@ void executive::stop( const exec_process::status status )
       }
 
    } while ( loop );
-}
-
-void executive::run()
-{
-   exec_server::getInstance().process();
 }

@@ -34,11 +34,6 @@ void exec_server::process()
       msgHandler->process();
       send( msgHandler->reply() );
    }
-   //else
-   //{
-   //   std::cout << "Server Receive: " << std::endl;
-   //   std::cout << "\t" << "No Data" << std::endl;
-   //}
 }
 
 void exec_server::send( const std::string message )

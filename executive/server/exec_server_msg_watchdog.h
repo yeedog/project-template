@@ -12,15 +12,13 @@ class exec_server_msg_watchdog : public exec_server_msg
 {
    public:
 
-      explicit exec_server_msg_watchdog( ProtoExecutive::Exec_Message );
+      explicit exec_server_msg_watchdog( ProtoExecutive::Exec_Inbound_Message );
 
       void process() override;
       std::string reply() override;
 
    protected:
    private:
-
-      ProtoExecutive::Exec_Message _messageFromClient;
 };
 
 #endif //EXEC_SERVER_MSG_WATCHDOG_H

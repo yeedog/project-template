@@ -8,22 +8,13 @@ project( project-template )
 set( CMAKE_CXX_STANDARD 17 )
 
 include_directories( ../message_queues )
+include_directories( ../executive/client )
 include_directories( ../cmake-build-debug/proto_buffers/ )
 
-include_directories( client )
-
 set( MODEL_SRC_FILES
-     client/model_exec_client.cpp
-     client/model_exec_client.h
-     client/model_exec_client_msg.cpp
-     client/model_exec_client_msg.h
-     client/model_exec_client_msg_version.cpp
-     client/model_exec_client_msg_version.h
-     client/model_exec_client_msg_watchdog.cpp
-     client/model_exec_client_msg_watchdog.h
+     main.cpp
      model.cpp
-     model.h
-     main.cpp )
+     model.h )
 
 add_executable( model ${MODEL_SRC_FILES} )
-target_link_libraries( model message_queues proto )
+target_link_libraries( model message_queues proto exec_client )

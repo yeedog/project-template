@@ -19,7 +19,13 @@ class exec_server_msg
       virtual std::string reply() = 0;
 
    protected:
+
+      explicit exec_server_msg( ProtoExecutive::Exec_Inbound_Message );
+      ProtoExecutive::Exec_Inbound_Message getMessageFromClient() const;
+
    private:
+
+      ProtoExecutive::Exec_Inbound_Message _messageFromClient;
 };
 
 #endif //EXEC_SERVER_MSG_H

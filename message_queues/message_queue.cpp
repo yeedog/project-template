@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
-#include <limits>
 #include <tuple>
 
 #include "message_queue.h"
@@ -36,7 +35,7 @@ message_queue::message_queue_status message_queue::send( const std::string messa
 
 std::string message_queue::receive()
 {
-   const int32_t max_bytes = 6;
+   const int32_t max_bytes = 1000;
    auto[total_bytes, message] = read( max_bytes );
 
    const bool received_failed = ( total_bytes == -1 );
@@ -65,8 +64,10 @@ std::string message_queue::receive()
 std::tuple<int32_t, std::string> message_queue::read( const int32_t max_bytes, const int32_t flags )
 {
    char buffer[max_bytes];
-   const int32_t total_bytes = zmq_recv( _socket, buffer, max_bytes, flags );
+   memset( &buffer, '\0', static_cast<size_t>( max_bytes ) );
 
+   const int32_t total_bytes = zmq_recv( _socket, buffer, max_bytes, flags );
    std::string message = ( ( total_bytes > 0 ) ? std::string( buffer ) : std::string() );
+
    return std::make_tuple( total_bytes, message );
 }

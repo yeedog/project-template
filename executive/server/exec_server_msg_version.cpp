@@ -7,34 +7,30 @@
 
 #include "exec_server_msg_version.h"
 
-exec_server_msg_version::exec_server_msg_version(ProtoExecutive::Exec_Message msg) :
-   _messageFromClient(msg),
-   _interfaceAccepted( false )
+exec_server_msg_version::exec_server_msg_version( ProtoExecutive::Exec_Inbound_Message msg ) :
+   exec_server_msg( msg )
 {
    // do nothing
 }
 
 void exec_server_msg_version::process()
 {
-   std::cout << "Executive MQ Server Receive: " << _messageFromClient.ShortDebugString() << std::endl;
+   std::cout << "Executive MQ Server Receive: " << exec_server_msg::getMessageFromClient().ShortDebugString() << std::endl;
 
-   _interfaceAccepted = ( _messageFromClient.version().version() == _interfaceVersion );
-   if( !_interfaceAccepted )
-   {
-      std::cout << "Bad Interface Version: (" << _messageFromClient.version().version() << ") Expected: (" << _interfaceVersion << ")" << std::endl;
-   }
+   std::cout << "Software Version for: (" << exec_server_msg::getMessageFromClient().proc_id() << ")" << std::endl;
+   std::cout << "\t" << "Version: (" << exec_server_msg::getMessageFromClient().version().software_version() << ")" << std::endl;
 }
 
 std::string exec_server_msg_version::reply()
 {
-   auto version = std::make_shared<ProtoLogger::Version_Interface>();
-   version->set_status( _interfaceAccepted ? ProtoLogger::ACCEPT : ProtoLogger::REJECT );
+   ProtoExecutive::Version_Outbound_Message reply;
+   reply.set_status( ProtoExecutive::ACCEPT );
 
-   ProtoLogger::Logger_Message msg;
-   msg.set_message_type( ProtoLogger::VERSION_INTERFACE );
-   msg.mutable_version()->CopyFrom(*version);
+   auto messageToClient = std::make_shared<ProtoExecutive::Exec_Outbound_Message>();
+   messageToClient->set_message_type( ProtoExecutive::VERSION );
+   messageToClient->mutable_version()->CopyFrom( reply );
 
-   std::cout << "Executive MQ Server Send: " << msg.ShortDebugString() << std::endl;
+   std::cout << "Executive MQ Server Send: " << messageToClient->ShortDebugString() << std::endl;
 
-   return msg.SerializeAsString();
+   return messageToClient->SerializeAsString();
 }

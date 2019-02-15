@@ -6,7 +6,7 @@
 #include <csignal>
 #include <thread>
 #include <cstring>
-#include <model_exec_client.h>
+#include <exec_client.h>
 
 #include "model.h"
 
@@ -66,7 +66,7 @@ int main()
 
    installSignals();
 
-   model_exec_client::getInstance().process( ProtoExecutive::VERSION_INTERFACE );
+   exec_client::getInstance().process( ProtoExecutive::MODEL, ProtoExecutive::VERSION );
 
    model log;
 
@@ -77,7 +77,7 @@ int main()
 
       std::this_thread::sleep_for( std::chrono::milliseconds( 5 ) );
 
-      model_exec_client::getInstance().process( ProtoExecutive::WATCHDOG_KICK );
+      exec_client::getInstance().process( ProtoExecutive::MODEL, ProtoExecutive::WATCHDOG );
    }
 
    std::cout << "Model: Exiting" << std::endl;

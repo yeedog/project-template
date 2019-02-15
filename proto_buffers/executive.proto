@@ -5,6 +5,10 @@
 syntax = "proto3";
 package ProtoExecutive;
 
+// ------------------------------------------------------
+// ---------------- Exec Inbound Message ----------------
+// ------------------------------------------------------
+
 enum Process_Id
 {
    INVALID_PROCESS = 0;
@@ -16,28 +20,57 @@ enum Process_Id
 enum Message_Type
 {
    INVALID_TYPE = 0;
-   VERSION_INTERFACE = 1;
-   WATCHDOG_KICK = 2;
+
+   VERSION = 1;
+   WATCHDOG = 2;
 }
 
-message Exec_Message
+message Exec_Inbound_Message
+{
+   Process_Id proc_id = 1;
+   Message_Type message_type = 2;
+
+   oneof payload
+   {
+      Version_Inbound_Message version = 3;
+   }
+}
+
+message Version_Inbound_Message
+{
+   string software_version = 1;
+};
+
+// ------------------------------------------------------
+// ---------------- Exec Outbound Message ---------------
+// ------------------------------------------------------
+
+enum Message_Status
+{
+   INVALID_STATUS = 0;
+
+   ACCEPT = 1;
+   REJECT = 2;
+}
+
+message Exec_Outbound_Message
 {
    Message_Type message_type = 1;
 
    oneof payload
    {
-      Version_Interface version = 2;
-      Watchdog_Kick watchdog = 3;
+      Version_Outbound_Message version = 2;
+      Watchdog_Outbound_Message watchdog = 3;
    }
 }
 
-message Version_Interface
+message Version_Outbound_Message
 {
-   int32 version = 1;
+   Message_Status status = 1;
 };
 
-message Watchdog_Kick
+message Watchdog_Outbound_Message
 {
-   Process_Id id = 1;
+   Message_Status status = 1;
 };
 
