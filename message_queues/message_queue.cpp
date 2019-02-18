@@ -41,8 +41,8 @@ std::string message_queue::receive()
    const bool received_failed = ( total_bytes == -1 );
    if ( received_failed )
    {
-      //std::cout << "Receive Failed: " << std::endl;
-      //std::cout << '\t' << "Errno (" << errno << "): " << strerror( errno ) << std::endl;
+      std::cout << "Receive Failed: " << std::endl;
+      std::cout << '\t' << "Errno (" << errno << "): " << strerror( errno ) << std::endl;
 
       message.clear();
    }
@@ -66,7 +66,7 @@ std::tuple<int32_t, std::string> message_queue::read( const int32_t max_bytes, c
    char buffer[max_bytes];
    memset( &buffer, '\0', static_cast<size_t>( max_bytes ) );
 
-   const int32_t total_bytes = zmq_recv( _socket, buffer, max_bytes, flags );
+   const int32_t total_bytes = zmq_recv( _socket, buffer, static_cast<size_t>( max_bytes ), flags );
    std::string message = ( ( total_bytes > 0 ) ? std::string( buffer ) : std::string() );
 
    return std::make_tuple( total_bytes, message );
