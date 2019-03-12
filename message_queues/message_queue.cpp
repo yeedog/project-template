@@ -41,8 +41,12 @@ std::string message_queue::receive()
    const bool received_failed = ( total_bytes == -1 );
    if ( received_failed )
    {
-      std::cout << "Receive Failed: " << std::endl;
-      std::cout << '\t' << "Errno (" << errno << "): " << strerror( errno ) << std::endl;
+      // Non-blocking mode was requested and no messages are available at the moment
+      if( errno != EAGAIN )
+      {
+         std::cout << "Receive Failed: " << std::endl;
+         std::cout << '\t' << "Errno (" << errno << "): " << strerror( errno ) << std::endl;
+      }
 
       message.clear();
    }
