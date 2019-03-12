@@ -4,12 +4,12 @@
 # Requirements
 
 ## Server
-- [x] The Message Queue Library shall provide a means to create a Server.
-- [x] The Message Queue Library shall allow a Server to communicate on a specific port.
+- [ ] The Message Queue Library shall provide a means to create a Server.
+- [ ] The Message Queue Library shall allow a Server to communicate on a specific port.
 
 ## Client
-- [x] The Message Queue Library shall provide a means to create a Client.
-- [x] The Message Queue Library shall provide a means to connect to a Server on a specific port.
+- [ ] The Message Queue Library shall provide a means to create a Client.
+- [ ] The Message Queue Library shall provide a means to connect to a Server on a specific port.
 
 ## Data Security
 - [ ] The Message Queue Library shall exchange Elliptic-curve Diffie–Hellman keys on connection.
