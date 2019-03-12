@@ -7,9 +7,9 @@ THe Logger process is responsible for all logging activities within the system. 
 - [ ] The Logger shall take no more than 100ms to complete its main loop.
 
 ## Interface: Executive
-- [x] The Logger shall create a synchronous connection with the Executive process on startup.
-- [x] The Logger shall send a Version message to Executive on startup.
-- [x] The Logger shall send a Watchdog message to Executive on each iteration of the main loop.
+- [ ] The Logger shall create a synchronous connection with the Executive process on startup.
+- [ ] The Logger shall send a Version message to Executive on startup.
+- [ ] The Logger shall send a Watchdog message to Executive on each iteration of the main loop.
 
 ## Interface: General
 - [ ] The Logger shall provide an interface for asynchronous communications with process.
