@@ -15,8 +15,8 @@ exec_client_msg_version::exec_client_msg_version( const ProtoExecutive::Exec_Out
 
 void exec_client_msg_version::process()
 {
-   std::cout << "Executive MQ Client Receive: " << exec_client_msg::getMessageFromServer().ShortDebugString()
-             << std::endl;
+   //std::cout << "Executive MQ Client Receive: ";
+   //std::cout << exec_client_msg::getMessageFromServer().ShortDebugString()<< std::endl;
 }
 
 std::string exec_client_msg_version::create( const ProtoExecutive::Process_Id procId )
@@ -26,7 +26,7 @@ std::string exec_client_msg_version::create( const ProtoExecutive::Process_Id pr
    messageToServer->set_message_type( ProtoExecutive::VERSION );
    messageToServer->mutable_version()->set_software_version( "1.2.3" );
 
-   std::cout << "Executive MQ Client Send: " << messageToServer->ShortDebugString() << std::endl;
+  // std::cout << "Executive MQ Client Send: " << messageToServer->ShortDebugString() << std::endl;
 
    return messageToServer->SerializeAsString();
 }

@@ -15,10 +15,12 @@ exec_server_msg_version::exec_server_msg_version( ProtoExecutive::Exec_Inbound_M
 
 void exec_server_msg_version::process()
 {
-   std::cout << "Executive MQ Server Receive: " << exec_server_msg::getMessageFromClient().ShortDebugString() << std::endl;
+   //std::cout << "Executive MQ Server Receive: ";
+   //std::cout << exec_server_msg::getMessageFromClient().ShortDebugString() << std::endl;
 
-   std::cout << "Software Version for: (" << exec_server_msg::getMessageFromClient().proc_id() << ")" << std::endl;
-   std::cout << "\t" << "Version: (" << exec_server_msg::getMessageFromClient().version().software_version() << ")" << std::endl;
+   //std::cout << "Software Version for: (" << exec_server_msg::getMessageFromClient().proc_id() << ")" << std::endl;
+   //std::cout << "\t" << "Version: (";
+   //std::cout << exec_server_msg::getMessageFromClient().version().software_version() << ")" << std::endl;
 }
 
 std::string exec_server_msg_version::reply()
@@ -30,7 +32,7 @@ std::string exec_server_msg_version::reply()
    messageToClient->set_message_type( ProtoExecutive::VERSION );
    messageToClient->mutable_version()->CopyFrom( reply );
 
-   std::cout << "Executive MQ Server Send: " << messageToClient->ShortDebugString() << std::endl;
+   //std::cout << "Executive MQ Server Send: " << messageToClient->ShortDebugString() << std::endl;
 
    return messageToClient->SerializeAsString();
 }

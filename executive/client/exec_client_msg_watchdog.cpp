@@ -15,7 +15,8 @@ exec_client_msg_watchdog::exec_client_msg_watchdog( const ProtoExecutive::Exec_O
 
 void exec_client_msg_watchdog::process()
 {
-   std::cout << "Executive MQ Client Receive: " << exec_client_msg::getMessageFromServer().ShortDebugString() << std::endl;
+   //std::cout << "Executive MQ Client Receive: ";
+   //std::cout << exec_client_msg::getMessageFromServer().ShortDebugString() << std::endl;
 }
 
 std::string exec_client_msg_watchdog::create( const ProtoExecutive::Process_Id procId )
@@ -24,7 +25,7 @@ std::string exec_client_msg_watchdog::create( const ProtoExecutive::Process_Id p
    messageToServer->set_proc_id( procId );
    messageToServer->set_message_type( ProtoExecutive::WATCHDOG );
 
-   std::cout << "Executive MQ Client Send: " << messageToServer->ShortDebugString() << std::endl;
+   //std::cout << "Executive MQ Client Send: " << messageToServer->ShortDebugString() << std::endl;
 
    return messageToServer->SerializeAsString();
 }

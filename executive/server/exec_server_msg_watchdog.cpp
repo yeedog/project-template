@@ -14,7 +14,8 @@ exec_server_msg_watchdog::exec_server_msg_watchdog( ProtoExecutive::Exec_Inbound
 
 void exec_server_msg_watchdog::process()
 {
-   std::cout << "Executive MQ Server Receive: " << exec_server_msg::getMessageFromClient().ShortDebugString() << std::endl;
+   //std::cout << "Executive MQ Server Receive: ";
+   //std::cout << exec_server_msg::getMessageFromClient().ShortDebugString() << std::endl;
 
    ProtoExecutive::Process_Id id = exec_server_msg::getMessageFromClient().proc_id();
 
@@ -33,7 +34,7 @@ std::string exec_server_msg_watchdog::reply()
    messageToClient->set_message_type( ProtoExecutive::WATCHDOG );
    messageToClient->mutable_version()->CopyFrom( reply );
 
-   std::cout << "Executive MQ Server Send: " << messageToClient->ShortDebugString() << std::endl;
+   //std::cout << "Executive MQ Server Send: " << messageToClient->ShortDebugString() << std::endl;
 
    return messageToClient->SerializeAsString();
 }
